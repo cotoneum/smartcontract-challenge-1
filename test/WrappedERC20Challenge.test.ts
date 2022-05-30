@@ -18,6 +18,12 @@ describe('WrappedERC20Challenge', async function () {
   })
 
   it('Attack', async function () {
+    const Attacker = await ethers.getContractFactory(
+      'ExploitWrappedERC20Challenge',
+      player
+    )
+    let attacker = await Attacker.deploy(challenge.address)
+    await attacker.exploit()
     expect(await challenge.isSolved()).to.be.true
   })
 })
